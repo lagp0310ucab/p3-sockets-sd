@@ -42,6 +42,8 @@ Para ejecutarlo, en el caso de mi usuario y los parámetros indicados por el ins
 ./client_msg.expect 192.168.24.1 10601 laguerrero.17 15000
 ```
 
+**Nota:** El servidor ```nc``` es iniciado en el código del cliente, por lo que no es necesario crear una instancia previa.
+
 ## Documentación utilizada.
 - https://linux.die.net/man/1/expect
 - https://unix.stackexchange.com/questions/535750/expect-not-matching-server-response-string/535756#535756
