@@ -6,6 +6,7 @@ Cliente para la Práctica 3 de Sistemas Distribuidos para conectarse al servidor
 ## Requisitos Previos.
 Instalar los siguientes paquetes en distribuciones Debian y derivados:
 - ```expect```
+
 Este paquete se puede encontrar en los repositorios oficiales de Debian y derivados (probado en Ubuntu 20.04 LTS):
 ```bash
 sudo apt install expect -y 
