@@ -1,0 +1,38 @@
+#!/usr/bin/expect
+
+# Tiempo para finalizar la ejecución del Script en caso de quedar en un loop.
+set timeout 20
+
+# Argumentos para el Script.
+set server_addr [lindex $argv 0]
+set server_port [lindex $argv 1]
+set user [lindex $argv 2]
+set udp_port [lindex $argv 3]
+
+# Ejecutar comandos.
+
+# Ejecutar el servidor al que llegará el mensaje por givememsg. Cuando reciba una entrada,
+# guardarla en msg_file.
+# Guardar el PID de nc en la variable pid para matar luego al proceso.
+set pid [exec nc -ulp $udp_port > msg_file &]
+spawn telnet $server_addr $server_port
+expect "Escape character is '^]'."
+send -- "helloiam $user\r"
+expect "ok"
+send -- "msglen\r"
+expect -re "ok*"
+send -- "givememsg $udp_port\r"
+expect "ok"
+# Tomar el texto generado por givememsg, descifrar mediante Base64. Luego, calcular el checksum.
+set cmd_out [exec cat msg_file | base64 -d | md5sum | awk {{print $1}}]
+send -- "chkmsg $cmd_out\r"
+expect "ok"
+send -- "bye\r"
+expect "ok BYE"
+
+# Tareas de limpieza.
+
+# Eliminar el archivo utilizado por el programa.
+exec rm msg_file
+# Matar al proceso que se crea para nc.
+exec kill -9 $pid
