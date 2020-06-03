@@ -25,7 +25,7 @@ Después de instalar las dependencias mencionadas previamente, basta con asignar
 chmod +x client_msg.expect
 ```
 
-La sintaxis del comando se muestra a continuación:
+La sintaxis del script se muestra a continuación:
 ```bash
 ./client_msg.expect <ip_servidor> <puerto_servidor> <usuario> <puerto_local_udp>
 ```
@@ -42,7 +42,7 @@ Para ejecutarlo, en el caso de mi usuario y los parámetros indicados por el ins
 ./client_msg.expect 192.168.24.1 10601 laguerrero.17 15000
 ```
 
-**Nota:** El servidor ```nc``` es iniciado en el código del cliente, por lo que no es necesario crear una instancia previa.
+**Nota:** El servidor ```nc``` es iniciado en el código del cliente con el número de puerto pasado como argumento.
 
 ## Documentación utilizada.
 - https://linux.die.net/man/1/expect
